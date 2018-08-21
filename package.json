@@ -1,0 +1,25 @@
+{
+  "name": "product-catalog-starter",
+  "version": "0.0.1",
+  "description": "cli to provide a starter Storyblok working space for product-catalog projects",
+  "main": "starter-cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiayutsaipersonal/product-catalog-starter.git"
+  },
+  "keywords": [
+    "node.js",
+    "Storyblok",
+    "cli",
+    "product-catalog-starter"
+  ],
+  "author": "Chia-Yu Tsai <chiayu.tsai.personal@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chiayutsaipersonal/product-catalog-starter/issues"
+  },
+  "homepage": "https://github.com/chiayutsaipersonal/product-catalog-starter#readme"
+}
