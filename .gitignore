@@ -1,1 +1,7 @@
-node_module
+node_modules
+
+.env
+.editorconfig
+.eslintrc.js
+.prettierignore
+jsconfig.json

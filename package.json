@@ -2,10 +2,7 @@
   "name": "product-catalog-starter",
   "version": "0.0.1",
   "description": "cli to provide a starter Storyblok working space for product-catalog projects",
-  "main": "starter-cli.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "cli.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chiayutsaipersonal/product-catalog-starter.git"
@@ -21,5 +18,27 @@
   "bugs": {
     "url": "https://github.com/chiayutsaipersonal/product-catalog-starter/issues"
   },
-  "homepage": "https://github.com/chiayutsaipersonal/product-catalog-starter#readme"
+  "homepage": "https://github.com/chiayutsaipersonal/product-catalog-starter#readme",
+  "dependencies": {
+    "dotenv-safe": "^6.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "eslint": "^5.4.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-promise": "^4.0.0",
+    "prettier": "^1.14.2"
+  },
+  "bin": {
+    "product-catalog-starter": "./src/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:starter": "cross-env NODE_ENV=development node ./src/cli.js",
+    "stage:starter": "cross-env NODE_ENV=staging node ./src/cli.js",
+    "prod:starter": "cross-env NODE_ENV=production node ./src/cli.js"
+  }
 }
