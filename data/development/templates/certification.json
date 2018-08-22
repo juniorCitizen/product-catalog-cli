@@ -1,0 +1,14 @@
+{
+  "name": null,
+  "slug": null,
+  "parent_id": null,
+  "tag_list": [],
+  "is_startpage": false,
+  "is_folder": false,
+  "path": "contacts",
+  "content": {
+    "component": "certification",
+    "name": null,
+    "logoUrl": null
+  }
+}

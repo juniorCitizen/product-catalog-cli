@@ -1,5 +1,8 @@
 node_modules
 
+data/development/images
+data/development/workingData
+
 .env
 .editorconfig
 .eslintrc.js

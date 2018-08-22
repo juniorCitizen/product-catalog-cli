@@ -12,7 +12,13 @@ const token = process.env.STORYBLOK_MANAGEMENT_API_TOKEN
 const backupDirPath = path.resolve('./data/backup')
 const dataDirPath = determineProperDataDirPath()
 
-const executionList = ['spaceVerify', 'spaceTeardown', 'spaceSetup']
+const executionList = [
+  'spaceVerify',
+  'spaceSetup',
+  'getContactSrcData',
+  'generateCertifications',
+  'generateCountries',
+]
 
 module.exports = {
   backupDirPath,

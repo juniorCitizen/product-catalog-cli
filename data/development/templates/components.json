@@ -1,0 +1,263 @@
+[
+  {
+    "name": "adjustability specifications",
+    "display_name": "Adjustability Specifications Component",
+    "created_at": "2018-08-22T05:39:44.503Z",
+    "id": 134504,
+    "schema": {
+      "adjustableAspects": { "type": "text" },
+      "minHeight": { "type": "text" },
+      "maxHeight": { "type": "text" },
+      "heightSettings": { "type": "number" },
+      "minLength": { "type": "text" },
+      "maxLength": { "type": "text" },
+      "lengthSettings": { "type": "number" },
+      "minSeatHeight": { "type": "text" },
+      "maxSeatHeight": { "type": "text" },
+      "seatHeightSettings": { "type": "number" }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null
+  },
+  {
+    "name": "category",
+    "display_name": "Category Component",
+    "created_at": "2018-08-22T05:39:44.297Z",
+    "id": 134495,
+    "schema": {
+      "name": { "type": "text" },
+      "parentCategory": {
+        "type": "option",
+        "source": "internal_stories",
+        "folder_slug": "categories/"
+      },
+      "subcategories": {
+        "type": "options",
+        "source": "internal_stories",
+        "folder_slug": "categories/"
+      },
+      "series": {
+        "type": "options",
+        "source": "internal_stories",
+        "folder_slug": "series/"
+      },
+      "products": {
+        "type": "options",
+        "source": "internal_stories",
+        "folder_slug": "products/"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null
+  },
+  {
+    "name": "certification",
+    "display_name": "certification component",
+    "created_at": "2018-08-22T05:39:44.304Z",
+    "id": 134498,
+    "schema": { "name": { "type": "text" }, "logoUrl": { "type": "image" } },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null
+  },
+  {
+    "name": "company",
+    "display_name": "Company Component",
+    "created_at": "2018-08-22T05:39:44.304Z",
+    "id": 134497,
+    "schema": {
+      "name": { "type": "text" },
+      "country": {
+        "type": "option",
+        "source": "internal_stories",
+        "folder_slug": "countries/"
+      },
+      "address": { "type": "text" },
+      "telephone": { "type": "text" },
+      "fax": { "type": "text" },
+      "certifications": {
+        "type": "options",
+        "source": "internal_stories",
+        "folder_slug": "certifications/"
+      },
+      "staffs": {
+        "type": "options",
+        "source": "internal_stories",
+        "folder_slug": "staffs/"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null
+  },
+  {
+    "name": "country",
+    "display_name": "Country Component",
+    "created_at": "2018-08-22T05:39:44.294Z",
+    "id": 134496,
+    "schema": { "name": { "type": "text" }, "flagUrl": { "type": "image" } },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null
+  },
+  {
+    "name": "general specifications",
+    "display_name": "General Specifications Component",
+    "created_at": "2018-08-22T05:39:44.494Z",
+    "id": 134502,
+    "schema": {
+      "height": { "type": "text" },
+      "length": { "type": "text" },
+      "width": { "type": "text" },
+      "depth": { "type": "text" },
+      "weight": { "type": "text" },
+      "weightCap": { "type": "text" }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null
+  },
+  {
+    "name": "photo",
+    "display_name": "Photo Component",
+    "created_at": "2018-08-22T05:39:44.496Z",
+    "id": 134501,
+    "schema": { "url": { "type": "image" } },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null
+  },
+  {
+    "name": "product",
+    "display_name": "Product Component",
+    "created_at": "2018-08-22T05:39:44.507Z",
+    "id": 134505,
+    "schema": {
+      "name": { "type": "text" },
+      "model": { "type": "text" },
+      "description": { "type": "text" },
+      "features": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": ["feature"]
+      },
+      "photos": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": ["photo"]
+      },
+      "specifications": {
+        "type": "bloks",
+        "restrict_components": true,
+        "component_whitelist": [
+          "adjustability specifications",
+          "general specifications"
+        ]
+      },
+      "parentCategories": {
+        "type": "option",
+        "source": "internal_stories",
+        "folder_slug": "categories/"
+      },
+      "parentSeries": {
+        "type": "option",
+        "source": "internal_stories",
+        "folder_slug": "series/"
+      },
+      "compatibleProducts": {
+        "type": "options",
+        "source": "internal_stories",
+        "folder_slug": "products/"
+      },
+      "compatibleAccessories": {
+        "type": "options",
+        "source": "internal_stories",
+        "folder_slug": "products/"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null
+  },
+  {
+    "name": "product feature",
+    "display_name": "Product Feature Component",
+    "created_at": "2018-08-22T05:39:44.311Z",
+    "id": 134499,
+    "schema": { "text": { "type": "text" } },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null
+  },
+  {
+    "name": "series",
+    "display_name": "Series Component",
+    "created_at": "2018-08-22T05:39:44.311Z",
+    "id": 134500,
+    "schema": {
+      "name": { "type": "text" },
+      "parentCategories": {
+        "type": "options",
+        "source": "internal_stories",
+        "folder_slug": "categories/"
+      },
+      "products": {
+        "type": "options",
+        "source": "internal_stories",
+        "folder_slug": "products/"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null
+  },
+  {
+    "name": "staff",
+    "display_name": "Staff Component",
+    "created_at": "2018-08-22T05:39:44.507Z",
+    "id": 134503,
+    "schema": {
+      "name": { "type": "text" },
+      "email": { "type": "text" },
+      "mobile": { "type": "text" }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null
+  }
+]
