@@ -1,0 +1,19 @@
+{
+  "name": null,
+  "slug": null,
+  "parent_id": null,
+  "tag_list": [],
+  "is_startpage": false,
+  "is_folder": false,
+  "path": "contacts",
+  "content": {
+    "component": "company",
+    "name": null,
+    "country": null,
+    "address": null,
+    "telephone": null,
+    "fax": null,
+    "certifications": [],
+    "staffs": []
+  }
+}
