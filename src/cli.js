@@ -24,8 +24,6 @@ prompt({
       let error = new Error(`incorrect execution mode: ${mode}`)
       throw error
     } else {
-      const mode = process.env.NODE_ENV
-      console.log(`running script in ${mode} mode`)
       // execute the modules listed in 'config.js' sequentially
       return Promise.each(executionList, cliModule => {
         return require(path.join(path.resolve('./src/cliModules'), cliModule))()

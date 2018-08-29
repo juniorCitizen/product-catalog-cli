@@ -13,11 +13,11 @@ const backupDirPath = path.resolve('./data/backup')
 const dataDirPath = determineProperDataDirPath()
 
 const executionList = [
-  'spaceVerify',
-  'spaceSetup',
-  'getContactSrcData',
-  'generateCertifications',
-  'generateCountries',
+  'resetIntermediaryFiles',
+  'verifySpace',
+  'resetSpace',
+  // 'generateContacts',
+  'generateCatalog',
 ]
 
 module.exports = {
