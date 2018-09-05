@@ -1,11 +1,11 @@
 {
-  "name": "product-catalog-starter",
+  "name": "product-catalog-cli",
   "version": "0.0.1",
   "description": "cli to provide a starter Storyblok working space for product-catalog projects",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chiayutsaipersonal/product-catalog-starter.git"
+    "url": "git+https://github.com/chiayutsaipersonal/product-catalog-cli.git"
   },
   "engines": {
     "node": ">=8.11.1",
@@ -17,12 +17,12 @@
     "cli",
     "product-catalog-starter"
   ],
-  "author": "Chia-Yu Tsai <chiayu.tsai.personal@gmail.com>",
+  "author": "juniorCitizen <chiayu.tsai.personal@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chiayutsaipersonal/product-catalog-starter/issues"
+    "url": "https://github.com/chiayutsaipersonal/product-catalog-cli/issues"
   },
-  "homepage": "https://github.com/chiayutsaipersonal/product-catalog-starter#readme",
+  "homepage": "https://github.com/chiayutsaipersonal/product-catalog-cli#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "bluebird": "^3.5.2",
