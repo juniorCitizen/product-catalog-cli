@@ -1,0 +1,14 @@
+{
+  "name": "certification",
+  "display_name": "certification component",
+  "schema": {
+    "name": {
+      "type": "text"
+    },
+    "logoUrl": {
+      "type": "image"
+    }
+  },
+  "is_root": true,
+  "is_nestable": false
+}

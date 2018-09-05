@@ -1,0 +1,15 @@
+{
+  "name": null,
+  "slug": null,
+  "parent_id": null,
+  "tag_list": [],
+  "is_startpage": false,
+  "is_folder": false,
+  "path": null,
+  "content": {
+    "component": "series",
+    "name": null,
+    "parentCategory": null,
+    "products": []
+  }
+}

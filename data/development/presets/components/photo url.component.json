@@ -1,0 +1,11 @@
+{
+  "name": "photo url",
+  "display_name": "Photo Url Component",
+  "schema": {
+    "url": {
+      "type": "image"
+    }
+  },
+  "is_root": false,
+  "is_nestable": true
+}

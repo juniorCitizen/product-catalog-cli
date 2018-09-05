@@ -1,0 +1,21 @@
+{
+  "name": "series",
+  "display_name": "Series Component",
+  "schema": {
+    "name": {
+      "type": "text"
+    },
+    "parentCategory": {
+      "type": "option",
+      "source": "internal_stories",
+      "folder_slug": "categories/"
+    },
+    "products": {
+      "type": "options",
+      "source": "internal_stories",
+      "folder_slug": "products/"
+    }
+  },
+  "is_root": true,
+  "is_nestable": false
+}

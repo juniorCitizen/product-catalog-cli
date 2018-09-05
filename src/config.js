@@ -1,34 +1,37 @@
 const path = require('path')
-
 require('dotenv-safe').config()
 
 const isDevMode = process.env.NODE_ENV === 'development'
 const isStageMode = process.env.NODE_ENV === 'staging'
 const isProdMode = process.env.NODE_ENV === 'production'
 
-const spaceId = determineProperSpaceId()
+const backupDir = path.resolve('./data/backup')
+const dataDir = determineDataDir()
+const logsDir = path.resolve('./logs')
+const cliModulesDir = path.resolve('./src/cliModules')
+
+const execMode = process.env.NODE_ENV
+const spaceId = determineSpaceId()
 const token = process.env.STORYBLOK_MANAGEMENT_API_TOKEN
 
-const backupDirPath = path.resolve('./data/backup')
-const dataDirPath = determineProperDataDirPath()
-
-const executionList = [
-  'resetIntermediaryFiles',
-  'verifySpace',
-  'resetSpace',
-  // 'generateContacts',
-  'generateCatalog',
-]
-
 module.exports = {
-  backupDirPath,
-  dataDirPath,
-  executionList,
+  dir: {
+    backup: backupDir,
+    data: dataDir,
+    logs: logsDir,
+    cliModules: cliModulesDir,
+  },
+  mode: {
+    dev: isDevMode,
+    stage: isStageMode,
+    prod: isProdMode,
+  },
+  execMode,
   spaceId,
   token,
 }
 
-function determineProperDataDirPath() {
+function determineDataDir() {
   return isProdMode
     ? path.resolve('./data/production')
     : isStageMode
@@ -36,7 +39,7 @@ function determineProperDataDirPath() {
       : path.resolve('./data/development')
 }
 
-function determineProperSpaceId() {
+function determineSpaceId() {
   return isDevMode
     ? parseInt(process.env.STORYBLOK_DEV_SPACE_ID) || null
     : isStageMode

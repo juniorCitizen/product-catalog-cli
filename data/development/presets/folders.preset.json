@@ -1,0 +1,72 @@
+[
+  {
+    "name": "categories",
+    "parent_id": 0,
+    "is_folder": true,
+    "slug": "categories",
+    "default_root": "category"
+  },
+  {
+    "name": "certifications",
+    "parent_id": 0,
+    "is_folder": true,
+    "slug": "certifications",
+    "default_root": "certification"
+  },
+  {
+    "name": "companies",
+    "parent_id": 0,
+    "is_folder": true,
+    "slug": "companies",
+    "default_root": "company"
+  },
+  {
+    "name": "countries",
+    "parent_id": 0,
+    "is_folder": true,
+    "slug": "countries",
+    "default_root": "country"
+  },
+  {
+    "name": "features",
+    "parent_id": 0,
+    "is_folder": true,
+    "slug": "features",
+    "default_root": "features"
+  },
+  {
+    "name": "photos",
+    "parent_id": 0,
+    "is_folder": true,
+    "slug": "photos",
+    "default_root": "photos"
+  },
+  {
+    "name": "products",
+    "parent_id": 0,
+    "is_folder": true,
+    "slug": "products",
+    "default_root": "product"
+  },
+  {
+    "name": "series",
+    "parent_id": 0,
+    "is_folder": true,
+    "slug": "series",
+    "default_root": "series"
+  },
+  {
+    "name": "specifications",
+    "parent_id": 0,
+    "is_folder": true,
+    "slug": "specifications",
+    "default_root": "specifications"
+  },
+  {
+    "name": "staffs",
+    "parent_id": 0,
+    "is_folder": true,
+    "slug": "staffs",
+    "default_root": "staff"
+  }
+]

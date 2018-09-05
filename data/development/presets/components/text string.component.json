@@ -1,0 +1,11 @@
+{
+  "name": "text string",
+  "display_name": "Text String Component",
+  "schema": {
+    "text": {
+      "type": "text"
+    }
+  },
+  "is_root": false,
+  "is_nestable": true
+}

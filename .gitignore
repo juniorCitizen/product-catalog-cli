@@ -1,6 +1,13 @@
 node_modules
 
-data
+data/backup
+data/development/images
+data/development/userData/photos
+data/development/serverData
+data/development/workingData
+data/staging
+data/production
+logs
 
 .env
 .editorconfig

@@ -1,0 +1,26 @@
+{
+  "name": "general specifications",
+  "display_name": "General Specifications Component",
+  "schema": {
+    "height": {
+      "type": "text"
+    },
+    "length": {
+      "type": "text"
+    },
+    "width": {
+      "type": "text"
+    },
+    "depth": {
+      "type": "text"
+    },
+    "weight": {
+      "type": "text"
+    },
+    "weightCap": {
+      "type": "text"
+    }
+  },
+  "is_root": true,
+  "is_nestable": true
+}

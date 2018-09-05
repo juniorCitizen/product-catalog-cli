@@ -1,0 +1,22 @@
+{
+  "name": null,
+  "slug": null,
+  "parent_id": null,
+  "tag_list": [],
+  "is_startpage": false,
+  "is_folder": false,
+  "path": null,
+  "content": {
+    "component": "product",
+    "name": null,
+    "model": null,
+    "description": null,
+    "features": null,
+    "photos": null,
+    "specifications": null,
+    "parentCategory": null,
+    "parentSeries": null,
+    "compatibleProducts": [],
+    "compatibleAccessories": []
+  }
+}

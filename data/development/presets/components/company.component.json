@@ -1,0 +1,35 @@
+{
+  "name": "company",
+  "display_name": "Company Component",
+  "schema": {
+    "name": {
+      "type": "text"
+    },
+    "country": {
+      "type": "option",
+      "source": "internal_stories",
+      "folder_slug": "countries/"
+    },
+    "address": {
+      "type": "text"
+    },
+    "telephone": {
+      "type": "text"
+    },
+    "fax": {
+      "type": "text"
+    },
+    "certifications": {
+      "type": "options",
+      "source": "internal_stories",
+      "folder_slug": "certifications/"
+    },
+    "staffs": {
+      "type": "options",
+      "source": "internal_stories",
+      "folder_slug": "staffs/"
+    }
+  },
+  "is_root": true,
+  "is_nestable": false
+}
