@@ -25,7 +25,8 @@ module.exports = workbook => {
     }, {})
   })
   const columnHeaders = workbook.worksheet('photos').data().columnHeaders
-  Workbook.wsDataFromJson(refreshedPhotoRecords, columnHeaders)
+  const worksheetData = Workbook.wsDataFromJson(refreshedPhotoRecords, columnHeaders)
+  workbook.commit('photos', worksheetData)
   return workbook
 }
 
