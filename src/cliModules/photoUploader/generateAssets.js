@@ -53,7 +53,7 @@ function processAndCreateAsset(photoRecord, recordIndex) {
   const fileName = photoRecord.absolutePath.split('\\').pop()
   const fileCount = recordIndex + 1
   logger.info(`uploading "${fileName}" (#${fileCount}) for "${photoRecord.model}"`)
-  return createImageAsset(photoRecord.absolutePath)
+  return createImageAsset(photoRecord.absolutePath, true, 640)
     .then(url => {
       logger.info(`photo "${fileName}" (#${fileCount}) for "${photoRecord.model}" uploaded`)
       photoRecord.publicUrl = url

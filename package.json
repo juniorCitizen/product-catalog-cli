@@ -14,8 +14,7 @@
   "keywords": [
     "node.js",
     "Storyblok",
-    "cli",
-    "product-catalog-starter"
+    "cli"
   ],
   "author": "juniorCitizen <chiayu.tsai.personal@gmail.com>",
   "license": "MIT",
@@ -30,10 +29,10 @@
     "fs-extra": "^7.0.0",
     "inquirer": "^6.2.0",
     "slugify": "^1.3.1",
-    "storyblok-management-api-wrapper": "^0.2.5",
+    "storyblok-management-api-wrapper": "^1.0.1",
     "uuid": "^3.3.2",
     "winston": "^3.1.0",
-    "xlsx-populate-wrapper": "^0.4.1"
+    "xlsx-populate-wrapper": "^0.4.2"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
@@ -42,7 +41,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-promise": "^4.0.1",
     "prettier": "^1.14.2"
   },
   "bin": {
