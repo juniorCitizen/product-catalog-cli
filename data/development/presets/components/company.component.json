@@ -13,6 +13,12 @@
     "address": {
       "type": "text"
     },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
     "telephone": {
       "type": "text"
     },
