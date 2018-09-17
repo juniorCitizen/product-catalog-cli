@@ -96,11 +96,11 @@ function buildRelationships({ photos, products }) {
 }
 
 /**
- * remove discared photos and map out the actual file path
+ * remove discared photos and map out the publicUrl to existing assets
  *
  * @typedef {Object} PrepedPhotos
  * @property {string} PrepedPhotos.model - product model
- * @property {string} PrepedPhotos.filePath - absolute file path to a photo image file
+ * @property {string} PrepedPhotos.filePath - public url to photo assets
  * @param {Object[]} photos - custom data object array
  * @param {string} photos[].model - product model
  * @param {string} photos[].originalFileName - original photo file name
@@ -112,7 +112,7 @@ function filterValidPhotoSet(photos) {
   return photos.filter(photo => !photo.reasonToDiscard).map(photo => {
     return {
       model: photo.model,
-      filePath: photo.publicUrl,
+      publicUrl: photo.publicUrl,
     }
   })
 }
