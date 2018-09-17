@@ -25,6 +25,9 @@
     "fax": {
       "type": "text"
     },
+    "email": {
+      "type": "text"
+    },
     "certifications": {
       "type": "options",
       "source": "internal_stories",
