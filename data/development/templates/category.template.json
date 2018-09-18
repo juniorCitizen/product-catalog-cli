@@ -9,6 +9,7 @@
   "content": {
     "component": "category",
     "name": null,
+    "photo": null,
     "parentCategory": null,
     "subcategories": [],
     "childrenSeries": [],

@@ -5,6 +5,12 @@
     "name": {
       "type": "text"
     },
+    "photos": {
+      "type": "option",
+      "restrict_components": true,
+      "source": "internal_stories",
+      "folder_slug": "photos/"
+    },
     "parentCategory": {
       "type": "option",
       "source": "internal_stories",
