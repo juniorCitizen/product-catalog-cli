@@ -31,6 +31,7 @@ module.exports = async () => {
       const findCountryByNameFn = country => country.name === company.country
       const countryId = stories.countries.find(findCountryByNameFn).id
       story.content.country = countryId
+      story.content.email = company.email
       story.content.address = company.address
       story.content.latitude = company.latitude
       story.content.longitude = company.longitude
