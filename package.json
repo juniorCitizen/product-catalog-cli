@@ -49,7 +49,6 @@
     "photo-uploader": "./src/photoUploader.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev:starter": "cross-env NODE_ENV=development node ./src/starter.js",
     "stage:starter": "cross-env NODE_ENV=staging node ./src/starter.js",
     "prod:starter": "cross-env NODE_ENV=production node ./src/starter.js",
