@@ -19,6 +19,9 @@
     "longitude": {
       "type": "number"
     },
+    "zoom": {
+      "type": "number"
+    },
     "telephone": {
       "type": "text"
     },

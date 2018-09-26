@@ -35,6 +35,7 @@ module.exports = async () => {
       story.content.address = company.address
       story.content.latitude = company.latitude
       story.content.longitude = company.longitude
+      story.content.zoom = company.zoom
       story.content.telephone = company.telephone
       story.content.fax = company.fax
       story.content.certifications = findCertificationUuids(

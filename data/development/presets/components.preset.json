@@ -67,6 +67,9 @@
         "folder_slug": "countries/"
       },
       "address": { "type": "text" },
+      "latitude": { "type": "number" },
+      "longitude": { "type": "number" },
+      "zoom": { "type": "number" },
       "telephone": { "type": "text" },
       "fax": { "type": "text" },
       "certifications": {
