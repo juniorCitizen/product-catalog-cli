@@ -20,7 +20,7 @@ module.exports = async () => {
     ])
     // create certification logo image assets
     const logoUrls = await Promise.map(workingData, dataEntry => {
-      const imagesDir = path.join(dir.data, 'images/certifications')
+      const imagesDir = path.join(dir.data, 'userData/images/certifications')
       const logoPath = path.join(imagesDir, dataEntry.logo)
       return createImageAsset(logoPath)
     })

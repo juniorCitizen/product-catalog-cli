@@ -1,7 +1,7 @@
 node_modules
 
 data/backup
-data/development/images
+data/development/userData/images
 data/development/userData/photos
 data/development/serverData
 data/development/workingData

@@ -20,7 +20,7 @@ module.exports = async () => {
     ])
     // create flag logo image assets
     const flagUrls = await Promise.map(workingData, dataEntry => {
-      const imagesDir = path.join(dir.data, 'images/flags')
+      const imagesDir = path.join(dir.data, 'userData/images/flags')
       const flagPath = path.join(imagesDir, dataEntry.flag)
       return createImageAsset(flagPath)
     })
