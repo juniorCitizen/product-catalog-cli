@@ -27,7 +27,7 @@ function setConcurrency() {
     type: 'input',
     name: 'concurrencyCount',
     message:
-      'enter number of concurrent upload (between 2 to 5 is recommended depending on the speed of internet connection and available memory)',
+      'enter desired number of concurrent upload (between 2 to 5 is recommended depending on the speed of internet connection and available memory)',
   })
     .then(({ concurrencyCount }) => parseInt(concurrencyCount))
     .catch(error => Promise.reject(error))
