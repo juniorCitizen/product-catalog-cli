@@ -1,6 +1,6 @@
 const verifyWorkSpace = require('../common/verifyWorkSpace')
 const clearLocalFolders = require('./clearLocalFolders')
-const storyblokEnvTeardown = require('./storyblokEnvTeardown')
+const storyblokTeardown = require('./storyblokTeardown')
 const createStoryblokComponents = require('./createStoryblokComponents')
 const createStoryblokFolders = require('./createStoryblokFolders')
 const getContactsWorkingData = require('./getContactsWorkingData')
@@ -19,7 +19,7 @@ module.exports = () => {
   return (
     clearLocalFolders()
       .then(() => verifyWorkSpace())
-      .then(() => storyblokEnvTeardown())
+      .then(() => storyblokTeardown())
       .then(() => createStoryblokComponents())
       .then(() => createStoryblokFolders())
       .then(() => getContactsWorkingData())
