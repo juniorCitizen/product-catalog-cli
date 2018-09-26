@@ -36,7 +36,7 @@ module.exports = () => {
           const filterFn = photo => photo.model === product.model
           const productPhotos = workingData.photos.filter(filterFn)
           // generate new photo story if there are photos for this product
-          if (productPhotos > 0) {
+          if (productPhotos.length > 0) {
             const partialSlug = 'model-' + slugify(product.model, { lower: true })
             const story = Object.assign({}, photosStoryTemplate)
             story.name = product.model
@@ -47,6 +47,7 @@ module.exports = () => {
             story.content.photoUrls = productPhotos.map(photo => {
               return { component: 'photo url', url: photo.publicUrl }
             })
+            photoStories.push(story)
           }
           return photoStories
         }, [])
