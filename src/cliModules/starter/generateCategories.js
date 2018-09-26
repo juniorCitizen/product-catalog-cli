@@ -15,10 +15,15 @@ module.exports = () => {
     read.folderId('categories'),
     read.template('category'),
     read.workingData('categories'),
+    // read.workingData('photos'),
   ])
-    .then(([parentId, template, workingData]) => {
+    .then(([parentId, template, categoryWorkingData /*, photoWorkingData*/]) => {
+      const workingData = {
+        categories: categoryWorkingData,
+        // photos: photoWorkingData,
+      }
       // generate category contents
-      const stories = workingData.map(category => {
+      const stories = workingData.categories.map(category => {
         const slug = slugify(category.name, { lower: true }) + '-category'
         const story = Object.assign({}, template)
         story.name = category.name
@@ -41,7 +46,7 @@ module.exports = () => {
       }
       return Promise.all(stories.map(mappingFn))
         .then(stories => {
-          return establishRelationships(stories, workingData)
+          return establishRelationships(stories, workingData.categories)
             .then(() => write.stories('categories', stories))
             .catch(error => Promise.reject(error))
         })
@@ -55,10 +60,10 @@ module.exports = () => {
  * Determination of parent/children category relationships and updating server and local data accordingly.
  *
  * @param {Object[]} stories - category story array
- * @param {Object[]} workingData - category workingData
+ * @param {Object[]} categories - category workingData
  */
-function establishRelationships(stories, workingData) {
-  return Promise.each(workingData, async dataEntry => {
+function establishRelationships(stories, categories) {
+  return Promise.each(categories, async dataEntry => {
     // skip if parent is unlisted (root categories)
     if (!dataEntry.parentCategory) {
       return logger.info(`'${dataEntry.name}' is a root category`)
