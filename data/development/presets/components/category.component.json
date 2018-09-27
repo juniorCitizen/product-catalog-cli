@@ -3,12 +3,7 @@
   "display_name": "Category Component",
   "schema": {
     "name": { "type": "text" },
-    "photos": {
-      "type": "option",
-      "restrict_components": true,
-      "source": "internal_stories",
-      "folder_slug": "photos/"
-    },
+    "photo": { "type": "image" },
     "parentCategory": {
       "type": "option",
       "source": "internal_stories",

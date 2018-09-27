@@ -2,15 +2,8 @@
   "name": "series",
   "display_name": "Series Component",
   "schema": {
-    "name": {
-      "type": "text"
-    },
-    "photos": {
-      "type": "option",
-      "restrict_components": true,
-      "source": "internal_stories",
-      "folder_slug": "photos/"
-    },
+    "name": { "type": "text" },
+    "photo": { "type": "image" },
     "parentCategory": {
       "type": "option",
       "source": "internal_stories",

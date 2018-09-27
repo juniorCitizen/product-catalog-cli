@@ -15,12 +15,12 @@ module.exports = () => {
     read.folderId('categories'),
     read.template('category'),
     read.workingData('categories'),
-    // read.workingData('photos'),
+    read.workingData('photos'),
   ])
-    .then(([parentId, template, categoryWorkingData /*, photoWorkingData*/]) => {
+    .then(([parentId, template, categoryWorkingData, photoWorkingData]) => {
       const workingData = {
         categories: categoryWorkingData,
-        // photos: photoWorkingData,
+        photos: photoWorkingData,
       }
       // generate category contents
       const stories = workingData.categories.map(category => {
@@ -32,6 +32,9 @@ module.exports = () => {
         story.path = 'catalog/categories/' + slug + '/'
         story.content = Object.assign({}, template.content)
         story.content.name = category.name
+        const findFn = photoRecord => photoRecord.category === category.name
+        const photoRecord = workingData.photos.find(findFn)
+        story.content.photo = photoRecord ? photoRecord.publicUrl : null
         return story
       })
       // create categories on Storyblok server

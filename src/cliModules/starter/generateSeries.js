@@ -15,12 +15,17 @@ module.exports = () => {
     read.folderId('series'),
     read.template('series'),
     read.workingData('series'),
+    read.workingData('photos'),
     read.stories('categories'),
   ])
-    .then(([parentId, template, workingData, categories]) => {
+    .then(([parentId, template, seriesWorkingData, photoWorkingData, categories]) => {
+      const workingData = {
+        series: seriesWorkingData,
+        photos: photoWorkingData,
+      }
       const stories = { categories }
       // generate series contents
-      stories.series = workingData.map(series => {
+      stories.series = workingData.series.map(series => {
         const slug = slugify(series.name, { lower: true }) + '-series'
         const story = Object.assign({}, template)
         story.name = series.name
@@ -29,6 +34,9 @@ module.exports = () => {
         story.path = 'catalog/series/' + slug + '/'
         story.content = Object.assign({}, template.content)
         story.content.name = series.name
+        const findFn = photoRecord => photoRecord.series === series.name
+        const photoRecord = workingData.photos.find(findFn)
+        story.content.photo = photoRecord ? photoRecord.publicUrl : null
         return story
       })
       // create series on Storyblok server
@@ -62,10 +70,11 @@ module.exports = () => {
  * @param {Object} stories - story dataset
  * @param {Object[]} stories.categories - array of category stories
  * @param {Object[]} stories.series - array of series stories
- * @param {Object[]} workingData - series workingData
+ * @param {Object[]} workingData - workingData sets
+ * @param {Object[]} workingData.series - series workingData
  */
-function establishRelationships(stories, workingData) {
-  return Promise.each(workingData, dataEntry => {
+function establishRelationships(stories, { series }) {
+  return Promise.each(series, dataEntry => {
     // error out if a series is entered without a parentCategory
     if (!dataEntry.parentCategory) {
       const message = 'a series must be a child of a category'
