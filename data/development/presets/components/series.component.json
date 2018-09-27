@@ -3,7 +3,7 @@
   "display_name": "Series Component",
   "schema": {
     "name": { "type": "text" },
-    "photo": { "type": "image" },
+    "photoUrl": { "type": "image" },
     "parentCategory": {
       "type": "option",
       "source": "internal_stories",

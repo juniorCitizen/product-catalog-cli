@@ -36,7 +36,7 @@ module.exports = () => {
         story.content.name = series.name
         const findFn = photoRecord => photoRecord.series === series.name
         const photoRecord = workingData.photos.find(findFn)
-        story.content.photo = photoRecord ? photoRecord.publicUrl : null
+        story.content.photoUrl = photoRecord ? photoRecord.publicUrl : null
         return story
       })
       // create series on Storyblok server

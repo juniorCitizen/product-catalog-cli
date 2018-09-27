@@ -34,7 +34,7 @@ module.exports = () => {
         story.content.name = category.name
         const findFn = photoRecord => photoRecord.category === category.name
         const photoRecord = workingData.photos.find(findFn)
-        story.content.photo = photoRecord ? photoRecord.publicUrl : null
+        story.content.photoUrl = photoRecord ? photoRecord.publicUrl : null
         return story
       })
       // create categories on Storyblok server
