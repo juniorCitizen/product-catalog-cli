@@ -29,8 +29,8 @@ module.exports = async () => {
       story.content = Object.assign({}, template.content)
       story.content.name = company.name
       const findCountryByNameFn = country => country.name === company.country
-      const countryId = stories.countries.find(findCountryByNameFn).id
-      story.content.country = countryId
+      const countryUuid = stories.countries.find(findCountryByNameFn).uuid
+      story.content.country = countryUuid
       story.content.email = company.email
       story.content.address = company.address
       story.content.latitude = company.latitude

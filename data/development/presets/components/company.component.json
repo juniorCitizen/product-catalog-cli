@@ -8,7 +8,8 @@
     "country": {
       "type": "option",
       "source": "internal_stories",
-      "folder_slug": "countries/"
+      "folder_slug": "countries/",
+      "use_uuid": true
     },
     "address": {
       "type": "text"
@@ -22,13 +23,13 @@
     "zoom": {
       "type": "number"
     },
+    "email": {
+      "type": "text"
+    },
     "telephone": {
       "type": "text"
     },
     "fax": {
-      "type": "text"
-    },
-    "email": {
       "type": "text"
     },
     "certifications": {
