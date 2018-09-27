@@ -14,6 +14,7 @@ const generateSeries = require('./generateSeries')
 const generateProducts = require('./generateProducts')
 const generateFeatures = require('./generateFeatures')
 const generatePhotos = require('./generatePhotos')
+const sortCategories = require('./sortCategories')
 
 module.exports = () => {
   return clearLocalFolders()
@@ -32,5 +33,6 @@ module.exports = () => {
     .then(() => generateProducts())
     .then(() => generateFeatures())
     .then(() => generatePhotos())
+    .then(() => sortCategories())
     .catch(error => Promise.reject(error))
 }
