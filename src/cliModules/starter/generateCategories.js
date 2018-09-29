@@ -7,7 +7,10 @@ const { createStory, updateStory } = storyblokApi(spaceId, token)
 const logger = require('../../winston')
 
 /**
- * Generate product "category" content on a Storyblok server.  Generated content information returned from the request calls are written to disk.  Category parent/children relationships are also generated.
+ * Generate product "category" content on a Storyblok server.
+ * Generated content information returned from the request calls are written to disk.
+ * Set category parent/children relationships.
+ * Sync ordering of server category story to workingData's sequence
  */
 module.exports = () => {
   // reading required data from disk
@@ -17,20 +20,21 @@ module.exports = () => {
     read.workingData('categories'),
     read.workingData('photos'),
   ])
-    .then(([parentId, template, categoryWorkingData, photoWorkingData]) => {
+    .then(([categoriesFolderId, template, categoryWorkingData, photoWorkingData]) => {
       const workingData = {
         categories: categoryWorkingData,
         photos: photoWorkingData,
       }
+      const stories = {}
       // generate category contents
-      const stories = workingData.categories.map(category => {
+      stories.categories = workingData.categories.map(category => {
         const slug = slugify(category.name, { lower: true }) + '-category'
-        const story = Object.assign({}, template)
+        const story = JSON.parse(JSON.stringify(template))
         story.name = category.name
         story.slug = slug
-        story.parent_id = parentId
+        story.parent_id = categoriesFolderId
         story.path = 'catalog/categories/' + slug + '/'
-        story.content = Object.assign({}, template.content)
+        story.content = JSON.parse(JSON.stringify(template.content))
         story.content.name = category.name
         const findFn = photoRecord => photoRecord.category === category.name
         const photoRecord = workingData.photos.find(findFn)
@@ -38,21 +42,14 @@ module.exports = () => {
         return story
       })
       // create categories on Storyblok server
-      const mappingFn = story => {
-        const message = `"${story.name} category" created`
-        return createStory(story)
-          .then(story => {
-            logger.info(message)
-            return story
-          })
-          .catch(error => Promise.reject(error))
-      }
-      return Promise.all(stories.map(mappingFn))
-        .then(stories => {
-          return establishRelationships(stories, workingData.categories)
-            .then(() => write.stories('categories', stories))
-            .catch(error => Promise.reject(error))
+      // establish category relationships
+      // save the changes locally
+      return Promise.all(stories.categories.map(createStory))
+        .then(categoryStories => {
+          stories.categories = categoryStories
+          return establishRelationships(stories, workingData)
         })
+        .then(stories => write.stories('categories', stories.categories))
         .catch(error => Promise.reject(error))
     })
     .then(() => logger.info('categories content generation completed'))
@@ -65,29 +62,34 @@ module.exports = () => {
  * @param {Object[]} stories - category story array
  * @param {Object[]} categories - category workingData
  */
-function establishRelationships(stories, categories) {
-  return Promise.each(categories, async dataEntry => {
-    // skip if parent is unlisted (root categories)
-    if (!dataEntry.parentCategory) {
-      return logger.info(`'${dataEntry.name}' is a root category`)
-    }
-    // find the category story
-    const findIndexFn = story => story.name === dataEntry.name
-    const storyIndex = stories.findIndex(findIndexFn)
-    const story = stories.splice(storyIndex, 1)[0]
-    // find the parentCategory story
-    const findParentIndexFn = story => story.name === dataEntry.parentCategory
-    const parentIndex = stories.findIndex(findParentIndexFn)
-    const parentStory = stories.splice(parentIndex, 1)[0]
-    story.content.parentCategory = parentStory.id
-    parentStory.content.subcategories.push(story.uuid)
-    return Promise.all([updateStory(story.id, story), updateStory(parentStory.id, parentStory)])
-      .then(([updatedStory, updatedParentStory]) => {
-        stories.push(updatedStory)
-        stories.push(updatedParentStory)
-        const message = `"${updatedStory.name}" is a subcategory of "${updatedParentStory.name}"`
-        return logger.info(message)
+function establishRelationships(stories, workingData) {
+  // loop through each category workingData record
+  return Promise.each(workingData.categories, category => {
+    // skip for root category (no parent)
+    if (!category.parentCategory) return Promise.resolve()
+    // find and extract child category from array
+    const findChildIndexFn = categoryStory => categoryStory.name === category.name
+    const childIndex = stories.categories.findIndex(findChildIndexFn)
+    const childStory = stories.categories.splice(childIndex, 1)[0]
+    // find and extract the parent category from array
+    const findParentIndexFn = categoryStory => categoryStory.name === category.parentCategory
+    const parentIndex = stories.categories.findIndex(findParentIndexFn)
+    const parentStory = stories.categories.splice(parentIndex, 1)[0]
+    // update local data with child/parent id
+    childStory.content.parentCategory = parentStory.id
+    parentStory.content.subcategories.push(childStory.uuid)
+    // update server
+    return Promise.all([
+      updateStory(childStory.id, childStory),
+      updateStory(parentStory.id, parentStory),
+    ])
+      .then(([updatedChildStory, updatedParentStory]) => {
+        stories.categories.push(updatedChildStory)
+        stories.categories.push(updatedParentStory)
+        return Promise.resolve()
       })
       .catch(error => Promise.reject(error))
   })
+    .then(() => stories)
+    .catch(error => Promise.reject(error))
 }
