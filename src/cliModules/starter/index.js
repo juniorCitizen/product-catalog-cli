@@ -29,10 +29,10 @@ module.exports = () => {
     .then(() => generateCompanies())
     .then(() => getCatalogWorkingData())
     .then(() => generateCategories())
+    .then(() => sortCategories())
     .then(() => generateSeries())
     .then(() => generateProducts())
     .then(() => generateFeatures())
     .then(() => generatePhotos())
-    .then(() => sortCategories())
     .catch(error => Promise.reject(error))
 }

@@ -12,12 +12,13 @@ module.exports = () => {
   return read
     .presets('folders')
     .then(presets => {
-      const mappingFn = preset => {
-        return createStory(preset)
-          .then(folderDef => write.story('folders', folderDef))
-          .catch(error => Promise.reject(error))
-      }
-      return Promise.all(presets.map(mappingFn))
+      const mapCreateFn = preset => createStory(preset)
+      return Promise.all(presets.map(mapCreateFn))
+        .then(folderDefs => {
+          const mapWriteFn = folderDef => write.story('folders', folderDef)
+          return Promise.all(folderDefs.map(mapWriteFn))
+        })
+        .catch(error => Promise.reject(error))
     })
     .then(() => logger.info('Storyblok server content folders created'))
     .catch(error => Promise.reject(error))
