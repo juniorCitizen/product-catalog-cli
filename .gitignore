@@ -1,16 +1,4 @@
-node_modules
-
-data/backup
-data/development/userData/images
-data/development/userData/photos
-data/development/serverData
-data/development/workingData
-data/staging
-data/production
-logs
+/node_modules
+/userData
 
 .env
-.editorconfig
-.eslintrc.js
-.prettierignore
-jsconfig.json

@@ -1,0 +1,17 @@
+{
+  "[handlebars]": {
+    "editor.formatOnSave": false
+  },
+  // eslint
+  "eslint.alwaysShowStatus": true,
+  "eslint.autoFixOnSave": true,
+  // javascript
+  "javascript.validate.enable": false,
+  // prettier
+  "prettier.bracketSpacing": false,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.requireConfig": true,
+  "git.ignoreLimitWarning": true,
+}

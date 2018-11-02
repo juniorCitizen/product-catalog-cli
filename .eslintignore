@@ -1,4 +1,0 @@
-data
-logs
-node_modules
-!node_modules/storyblok-management-api-wrapper

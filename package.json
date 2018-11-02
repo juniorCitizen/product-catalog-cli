@@ -1,59 +1,61 @@
 {
   "name": "product-catalog-cli",
-  "version": "1.0.0",
-  "description": "cli to provide a starter Storyblok working space for product-catalog projects",
-  "main": "index.js",
+  "version": "0.0.1",
+  "description": "CLI scripts to provide starter working space for product-catalog website projects",
+  "main": "./src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chiayutsaipersonal/product-catalog-cli.git"
   },
-  "engines": {
-    "node": ">=8.11.1",
-    "npm": ">=5.6.0"
-  },
   "keywords": [
-    "node.js",
     "Storyblok",
-    "cli"
+    "node.js",
+    "typescript",
+    "Storyblok Mangement API"
   ],
-  "author": "juniorCitizen <chiayu.tsai.personal@gmail.com>",
+  "engines": {
+    "node": ">=8.12.0",
+    "npm": ">=6.4.1"
+  },
+  "author": {
+    "name": "juniorCitizen",
+    "email": "chiayu.tsai.personal@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/chiayutsaipersonal/product-catalog-cli/issues"
   },
   "homepage": "https://github.com/chiayutsaipersonal/product-catalog-cli#readme",
   "dependencies": {
-    "axios": "^0.18.0",
     "bluebird": "^3.5.2",
-    "dotenv-safe": "^6.0.0",
-    "fs-extra": "^7.0.0",
-    "inquirer": "^6.2.0",
-    "slugify": "^1.3.1",
-    "storyblok-management-api-wrapper": "^1.1.9",
-    "uuid": "^3.3.2",
-    "winston": "^3.1.0",
-    "xlsx-populate-wrapper": "^0.4.2"
+    "cross-env": "^5.2.0",
+    "dotenv-safe": "^6.1.0",
+    "lodash": "^4.17.11",
+    "slugify": "^1.3.2",
+    "storyblok-ts-client": "^4.3.11",
+    "world-countries": "^2.0.0",
+    "xlsx-populate-wrapper": "^1.0.9"
   },
   "devDependencies": {
-    "cross-env": "^5.2.0",
-    "eslint": "^5.6.1",
+    "eslint": "^5.8.0",
     "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-prettier": "^2.7.0",
+    "eslint-plugin-jest": "^21.26.2",
+    "eslint-plugin-jsdoc": "^3.9.1",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-promise": "^4.0.1",
+    "jest": "^23.6.0",
     "prettier": "^1.14.3"
   },
-  "bin": {
-    "starter": "./src/starter.js",
-    "photo-uploader": "./src/photoUploader.js"
-  },
   "scripts": {
-    "dev:starter": "cross-env NODE_ENV=development node ./src/starter.js",
-    "stage:starter": "cross-env NODE_ENV=staging node ./src/starter.js",
-    "prod:starter": "cross-env NODE_ENV=production node ./src/starter.js",
-    "dev:photos": "cross-env NODE_ENV=development node ./src/photoUploader.js",
-    "stage:photos": "cross-env NODE_ENV=staging node ./src/photoUploader.js",
-    "prod:photos": "cross-env NODE_ENV=production node ./src/photoUploader.js"
+    "test": "cross-env NODE_ENV=test jest --bail",
+    "coverage": "cross-env NODE_ENV=test jest --coverage",
+    "dev:test": "cross-env NODE_ENV=test jest --watch",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "eslint -c .eslintrc.js --fix src",
+    "start": "npm run start:dev",
+    "start:dev": "cross-env NODE_ENV=development node src/index.js",
+    "start:stage": "cross-env NODE_ENV=staging node src/index.js",
+    "start:prod": "cross-env NODE_ENV=production node src/index.js"
   }
 }
