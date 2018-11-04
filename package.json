@@ -39,7 +39,7 @@
   "devDependencies": {
     "eslint": "^5.8.0",
     "eslint-config-prettier": "^3.1.0",
-    "eslint-plugin-jest": "^21.26.2",
+    "eslint-plugin-jest": "^21.27.0",
     "eslint-plugin-jsdoc": "^3.9.1",
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-prettier": "^3.0.0",
@@ -52,7 +52,9 @@
     "coverage": "cross-env NODE_ENV=test jest --coverage",
     "dev:test": "cross-env NODE_ENV=test jest --watch",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "prelint": "npm run format",
     "lint": "eslint -c .eslintrc.js --fix src",
+    "prestart": "npm run lint",
     "start": "npm run start:dev",
     "start:dev": "cross-env NODE_ENV=development node src/index.js",
     "start:stage": "cross-env NODE_ENV=staging node src/index.js",
