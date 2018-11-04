@@ -23,6 +23,7 @@ module.exports = class Space {
     })
     const mapFn = module => module.generate()
     return Promise.mapSeries(this.modules, mapFn)
+      .then(() => this.apiClient.stories.publishPendings())
       .then(() => console.log('Storyblok starter space generated'))
       .catch(e => Promise.reject(e))
   }
