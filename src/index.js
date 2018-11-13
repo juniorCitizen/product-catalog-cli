@@ -1,12 +1,31 @@
-const Space = require('../src/classes/Space')
+const Promise = require('bluebird')
+const {Space} = require('storyblok-ts-client')
 
-const creds = require('./utilities').getCredentials()
+const credentials = require('./utilities').getCredentials()
 
-const space = new Space(creds.apiToken, creds.spaceId)
+class Workspace extends Space {
+  constructor(credentials) {
+    super(credentials)
+    this.modules = {
+      catalog: require('./modules/catalog'),
+      contacts: require('./modules/contacts'),
+    }
+  }
 
-space
-  .verify()
-  .then(() => space.teardown())
-  .then(() => space.generate())
+  installModules() {
+    const modules = Object.values(this.modules)
+    return Promise.mapSeries(modules, m => m.install())
+      .then(() => console.log('modules installation completed'))
+      .catch(e => Promise.reject(e))
+  }
+}
+
+const workspace = new Workspace(credentials)
+
+workspace
+  .sync()
+  .then(() => workspace.teardown())
+  .then(() => workspace.installModules())
+  .then(() => workspace.publishAll())
   .then(() => console.log('Storyblok starter script completed'))
-  .catch(console.log)
+  .catch(e => console.log(e))
