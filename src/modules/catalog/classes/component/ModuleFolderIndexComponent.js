@@ -34,6 +34,13 @@ const componentData = {
       folder_slug: 'catalog/products/',
       pos: 4,
     },
+    breadcrumbs: {
+      type: 'bloks',
+      required: true,
+      restrict_components: true,
+      component_whitelist: ['breadcrumb'],
+      pos: 5,
+    },
   },
   image: null,
   preview_field: 'name',

@@ -21,6 +21,7 @@ module.exports = class ModuleFolderIndex extends FolderIndex {
           categories: [],
           series: [],
           products: [],
+          breadcrumbs: [],
         },
       },
       parent
@@ -40,6 +41,17 @@ module.exports = class ModuleFolderIndex extends FolderIndex {
       await Promise.mapSeries(this.categories, c => c.generate())
       this.data.content.categories = this.categories.map(c => c.uuid)
       await super.generate()
+      const content = JSON.parse(JSON.stringify(this.content))
+      content.breadcrumbs = [
+        {
+          component: 'breadcrumb',
+          text: 'Catalog',
+          type: 'catalog',
+          uuid: this.uuid,
+          fullSlug: this.fullSlug,
+        },
+      ]
+      await this.updateContent(content)
       await Promise.map(this.categories, c => c.updateBreadcrumb(this))
     } catch (error) {
       throw error
