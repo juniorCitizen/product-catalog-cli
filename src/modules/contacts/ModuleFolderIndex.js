@@ -11,7 +11,7 @@ module.exports = class ModuleFolderIndex extends FolderIndex {
         content: {
           component: 'contacts',
           headline: 'Contact Us',
-          description: 'Gentry office information',
+          description: 'Gentry Way office information',
           companies: null,
         },
       },

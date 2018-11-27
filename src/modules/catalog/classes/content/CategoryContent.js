@@ -1,3 +1,4 @@
+const Promise = require('bluebird')
 const slugify = require('slugify')
 const {Asset, Content} = require('storyblok-ts-client')
 
@@ -33,18 +34,18 @@ module.exports = class CategoryContent extends Content {
     try {
       if (this.hasPhoto) {
         this.asset = new Asset(credentials, this.categoryData.photo)
-        await this.asset.generatePhoto()
+        await this.asset.generate.photo()
         this.data.content.photoUrl = this.asset.prettyUrl
       }
       this.categories = this.userData.categories
         .filter(record => record.parentCategory === this.categoryData.name)
-        .map(this.instantiateCategory(this))
+        .map(this.instantiateCategory())
       this.series = this.userData.series
         .filter(record => record.parentCategory === this.categoryData.name)
-        .map(this.instantiateSeries(this))
+        .map(this.instantiateSeries())
       this.products = this.userData.products
         .filter(record => record.parentCategory === this.categoryData.name)
-        .map(this.instantiateProduct(this))
+        .map(this.instantiateProduct())
       await Promise.all([
         ...this.categories.map(c => c.generate()),
         ...this.series.map(s => s.generate()),
@@ -59,9 +60,7 @@ module.exports = class CategoryContent extends Content {
     }
   }
 
-  instantiateCategory(categoryContent) {
-    const parentNodeSlug =
-      categoryContent.parent.fullSlug + '/' + categoryContent.slug
+  instantiateCategory() {
     return categoryData => {
       const slug = slugify(`category ${categoryData.name}`, {lower: true})
       return new CategoryContent(
@@ -72,15 +71,15 @@ module.exports = class CategoryContent extends Content {
           tag_list: ['catalog', 'category', 'content'],
           path: `catalog/categories/${slug}/`,
           content: {
-            component: 'categoryContent',
+            component: 'category',
             headline: `${categoryData.name} Category`,
             name: categoryData.name,
             description: categoryData.description,
             photoUrl: undefined,
-            parentNodeSlug,
             categories: [],
             series: [],
             products: [],
+            breadcrumbs: [],
           },
         },
         this.contentStoryFolders.category,
@@ -91,9 +90,7 @@ module.exports = class CategoryContent extends Content {
     }
   }
 
-  instantiateSeries(categoryContent) {
-    const parentNodeSlug =
-      categoryContent.parent.fullSlug + '/' + categoryContent.slug
+  instantiateSeries() {
     return seriesData => {
       const slug = slugify(`series ${seriesData.name}`, {lower: true})
       return new SeriesContent(
@@ -104,13 +101,13 @@ module.exports = class CategoryContent extends Content {
           tag_list: ['catalog', 'series', 'content'],
           path: `catalog/series/${slug}/`,
           content: {
-            component: 'seriesContent',
+            component: 'series',
             headline: `${seriesData.name} Series`,
             name: seriesData.name,
             description: seriesData.description,
             photoUrl: undefined,
-            parentNodeSlug,
             products: [],
+            breadcrumbs: [],
           },
         },
         this.contentStoryFolders.series,
@@ -121,9 +118,7 @@ module.exports = class CategoryContent extends Content {
     }
   }
 
-  instantiateProduct(categoryContent) {
-    const parentNodeSlug =
-      categoryContent.parent.fullSlug + '/' + categoryContent.slug
+  instantiateProduct() {
     return productData => {
       const slug = slugify(`model ${productData.model}`, {lower: true})
       return new ProductContent(
@@ -134,7 +129,7 @@ module.exports = class CategoryContent extends Content {
           tag_list: ['catalog', 'product', 'content'],
           path: `catalog/product/${slug}/`,
           content: {
-            component: 'productContent',
+            component: 'product',
             headline: productData.name,
             model: productData.model,
             name: productData.name,
@@ -143,7 +138,7 @@ module.exports = class CategoryContent extends Content {
             features: productData.features,
             specifications: undefined,
             isAccessory: productData.isAccessory,
-            parentNodeSlug,
+            breadcrumbs: [],
           },
         },
         this.contentStoryFolders.product,
@@ -151,6 +146,28 @@ module.exports = class CategoryContent extends Content {
         this.userData,
         productData
       )
+    }
+  }
+
+  async updateBreadcrumb(parent) {
+    try {
+      const content = JSON.parse(JSON.stringify(this.content))
+      content.breadcrumbs = [
+        ...(parent.content.breadcrumbs || []),
+        {
+          component: 'breadcrumb',
+          text: this.name,
+          type: this.content.component,
+          uuid: this.uuid,
+          fullSlug: this.fullSlug,
+        },
+      ]
+      await this.updateContent(content)
+      await Promise.map(this.products, p => p.updateBreadcrumb(this))
+      await Promise.map(this.series, s => s.updateBreadcrumb(this))
+      await Promise.map(this.categories, c => c.updateBreadcrumb(this))
+    } catch (error) {
+      throw error
     }
   }
 }

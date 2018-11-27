@@ -1,7 +1,7 @@
 const {Component} = require('storyblok-ts-client')
 
 const componentData = {
-  name: 'categoryContent',
+  name: 'category',
   display_name: 'Category Content Component',
   schema: {
     headline: {
@@ -25,27 +25,29 @@ const componentData = {
       required: false,
       pos: 3,
     },
-    parentNodeSlug: {
-      type: 'text',
-      required: true,
-      pos: 4,
-    },
     categories: {
       type: 'options',
       source: 'internal_stories',
       folder_slug: 'catalog/categories/',
-      pos: 5,
+      pos: 4,
     },
     series: {
       type: 'options',
       source: 'internal_stories',
       folder_slug: 'catalog/series/',
-      pos: 6,
+      pos: 5,
     },
     products: {
       type: 'options',
       source: 'internal_stories',
       folder_slug: 'catalog/products/',
+      pos: 6,
+    },
+    breadcrumbs: {
+      type: 'bloks',
+      required: true,
+      restrict_components: true,
+      component_whitelist: ['breadcrumb'],
       pos: 7,
     },
   },

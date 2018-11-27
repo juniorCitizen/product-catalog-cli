@@ -27,7 +27,7 @@ module.exports = class ProductContent extends Content {
   async generate() {
     try {
       await this.assetFolder.generate()
-      await Promise.all(this.assets.map(a => a.generatePhoto()))
+      await Promise.all(this.assets.map(a => a.generate.photo()))
       this.data.content.photoUrls = this.assets.map(asset => {
         return {name: '', filename: asset.prettyUrl}
       })
@@ -35,5 +35,20 @@ module.exports = class ProductContent extends Content {
     } catch (error) {
       throw error
     }
+  }
+
+  updateBreadcrumb(parent) {
+    const content = JSON.parse(JSON.stringify(this.content))
+    content.breadcrumbs = [
+      ...(parent.content.breadcrumbs || []),
+      {
+        component: 'breadcrumb',
+        text: this.name,
+        type: this.content.component,
+        uuid: this.uuid,
+        fullSlug: this.fullSlug,
+      },
+    ]
+    return this.updateContent(content)
   }
 }

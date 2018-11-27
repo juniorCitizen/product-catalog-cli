@@ -1,3 +1,4 @@
+const Promise = require('bluebird')
 const slugify = require('slugify')
 const {Asset, Content} = require('storyblok-ts-client')
 
@@ -30,12 +31,12 @@ module.exports = class SeriesContent extends Content {
     try {
       if (this.hasPhoto) {
         this.asset = new Asset(credentials, this.seriesData.photo)
-        await this.asset.generatePhoto()
+        await this.asset.generate.photo()
         this.data.content.photoUrl = this.asset.prettyUrl
       }
       this.products = this.userData.products
         .filter(record => record.parentSeries === this.seriesData.name)
-        .map(this.instantiateProduct(this))
+        .map(this.instantiateProduct())
       await Promise.all(this.products.map(p => p.generate()))
       this.data.content.products = this.products.map(p => p.uuid)
       await super.generate()
@@ -44,9 +45,7 @@ module.exports = class SeriesContent extends Content {
     }
   }
 
-  instantiateProduct(seriesContent) {
-    const parentNodeSlug =
-      seriesContent.parent.fullSlug + '/' + seriesContent.slug
+  instantiateProduct() {
     return productData => {
       const slug = slugify(`model ${productData.model}`, {lower: true})
       return new ProductContent(
@@ -57,7 +56,7 @@ module.exports = class SeriesContent extends Content {
           tag_list: ['catalog', 'product', 'content'],
           path: `catalog/product/${slug}/`,
           content: {
-            component: 'productContent',
+            component: 'product',
             headline: productData.name,
             model: productData.model,
             name: productData.name,
@@ -66,7 +65,7 @@ module.exports = class SeriesContent extends Content {
             features: productData.features,
             specifications: undefined,
             isAccessory: productData.isAccessory,
-            parentNodeSlug,
+            breadcrumbs: [],
           },
         },
         this.contentStoryFolders.product,
@@ -74,6 +73,26 @@ module.exports = class SeriesContent extends Content {
         this.userData,
         productData
       )
+    }
+  }
+
+  async updateBreadcrumb(parent) {
+    try {
+      const content = JSON.parse(JSON.stringify(this.content))
+      content.breadcrumbs = [
+        ...(parent.content.breadcrumbs || []),
+        {
+          component: 'breadcrumb',
+          text: this.name,
+          type: this.content.component,
+          uuid: this.uuid,
+          fullSlug: this.fullSlug,
+        },
+      ]
+      await this.updateContent(content)
+      await Promise.map(this.products, p => p.updateBreadcrumb(this))
+    } catch (error) {
+      throw error
     }
   }
 }

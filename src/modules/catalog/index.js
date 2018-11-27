@@ -9,6 +9,7 @@ const CategoryContentComponent = require('./classes/component/CategoryContentCom
 const ModuleFolderIndexComponent = require('./classes/component/ModuleFolderIndexComponent')
 const ProductContentComponent = require('./classes/component/ProductContentComponent')
 const SeriesContentComponent = require('./classes/component/SeriesContentComponent')
+const BreadcrumbComponent = require('./classes/component/BreadcrumComponent')
 
 const CategoriesFolder = require('./classes/contentFolder/CategoriesFolder')
 const ProductsFolder = require('./classes/contentFolder/ProductsFolder')
@@ -27,6 +28,7 @@ class CatalogModule {
       category: new CategoryContentComponent(credentials),
       series: new SeriesContentComponent(credentials),
       product: new ProductContentComponent(credentials),
+      breadcrumb: new BreadcrumbComponent(credentials),
     }
     // module root folder
     this.moduleFolder = new ModuleFolder(credentials)
@@ -52,6 +54,7 @@ class CatalogModule {
       await this.components.category.generate()
       await this.components.series.generate()
       await this.components.product.generate()
+      await this.components.breadcrumb.generate()
       await this.moduleFolder.generate()
       await this.contentStoryFolders.category.generate()
       await this.contentStoryFolders.series.generate()

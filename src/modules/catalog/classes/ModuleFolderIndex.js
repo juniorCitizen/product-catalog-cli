@@ -36,16 +36,17 @@ module.exports = class ModuleFolderIndex extends FolderIndex {
     try {
       this.categories = this.userData.categories
         .filter(record => !record.parentCategory)
-        .map(this.instantiateCategory(this))
+        .map(this.instantiateCategory())
       await Promise.mapSeries(this.categories, c => c.generate())
       this.data.content.categories = this.categories.map(c => c.uuid)
       await super.generate()
+      await Promise.map(this.categories, c => c.updateBreadcrumb(this))
     } catch (error) {
       throw error
     }
   }
 
-  instantiateCategory(folderIndex) {
+  instantiateCategory() {
     return categoryData => {
       const slug = slugify(`category ${categoryData.name}`, {lower: true})
       return new CategoryContent(
@@ -56,15 +57,15 @@ module.exports = class ModuleFolderIndex extends FolderIndex {
           tag_list: ['catalog', 'category', 'content'],
           path: `catalog/categories/${slug}/`,
           content: {
-            component: 'categoryContent',
+            component: 'category',
             headline: `${categoryData.name} Category`,
             name: categoryData.name,
             description: categoryData.description,
             photoUrl: undefined,
-            parentNodeSlug: folderIndex.parent.slug,
             categories: [],
             series: [],
             products: [],
+            breadcrumbs: [],
           },
         },
         this.contentStoryFolders.category,

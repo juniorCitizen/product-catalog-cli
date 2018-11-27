@@ -23,7 +23,7 @@ module.exports = class LogoAssetFolder extends AssetFolder {
       const filePath = path.join(logosDir, fileName)
       const asset = new CertificationAsset(credentials, filePath, this)
       this.assets.certifications.push(asset)
-      await asset.generateImage()
+      await asset.generate.logo()
       return asset
     } catch (error) {
       throw error
@@ -36,7 +36,7 @@ module.exports = class LogoAssetFolder extends AssetFolder {
       const filePath = path.join(flagsDir, fileName)
       const asset = new CertificationAsset(credentials, filePath, this)
       this.assets.flags.push(asset)
-      await asset.generateImage()
+      await asset.generate.direct()
       return asset
     } catch (error) {
       throw error
