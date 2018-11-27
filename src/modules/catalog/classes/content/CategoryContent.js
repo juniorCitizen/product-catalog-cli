@@ -69,7 +69,7 @@ module.exports = class CategoryContent extends Content {
           name: categoryData.name,
           slug,
           tag_list: ['catalog', 'category', 'content'],
-          path: `catalog/categories/${slug}/`,
+          path: `catalog?uuid=${slug}`,
           content: {
             component: 'category',
             headline: `${categoryData.name} Category`,
@@ -99,7 +99,7 @@ module.exports = class CategoryContent extends Content {
           name: seriesData.name,
           slug,
           tag_list: ['catalog', 'series', 'content'],
-          path: `catalog/series/${slug}/`,
+          path: `catalog?uuid=${slug}`,
           content: {
             component: 'series',
             headline: `${seriesData.name} Series`,
@@ -127,7 +127,7 @@ module.exports = class CategoryContent extends Content {
           name: productData.model,
           slug,
           tag_list: ['catalog', 'product', 'content'],
-          path: `catalog/product/${slug}/`,
+          path: `catalog/products?uuid=${slug}`,
           content: {
             component: 'product',
             headline: productData.name,

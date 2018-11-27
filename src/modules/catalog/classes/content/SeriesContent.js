@@ -54,7 +54,7 @@ module.exports = class SeriesContent extends Content {
           name: productData.model,
           slug,
           tag_list: ['catalog', 'product', 'content'],
-          path: `catalog/product/${slug}/`,
+          path: `catalog/products?uuid=${slug}`,
           content: {
             component: 'product',
             headline: productData.name,
