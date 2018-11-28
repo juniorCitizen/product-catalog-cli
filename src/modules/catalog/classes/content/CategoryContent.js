@@ -55,6 +55,7 @@ module.exports = class CategoryContent extends Content {
       this.data.content.series = this.series.map(s => s.uuid)
       this.data.content.products = this.products.map(p => p.uuid)
       await super.generate()
+      await this.updatePath(`catalog?uuid=${this.uuid}`)
     } catch (error) {
       throw error
     }
@@ -69,10 +70,10 @@ module.exports = class CategoryContent extends Content {
           name: categoryData.name,
           slug,
           tag_list: ['catalog', 'category', 'content'],
-          path: `catalog?uuid=${slug}`,
+          path: 'catalog',
           content: {
             component: 'category',
-            headline: `${categoryData.name} Category`,
+            headline: `${categoryData.name} Product Category`,
             name: categoryData.name,
             description: categoryData.description,
             photoUrl: undefined,
@@ -99,10 +100,10 @@ module.exports = class CategoryContent extends Content {
           name: seriesData.name,
           slug,
           tag_list: ['catalog', 'series', 'content'],
-          path: `catalog?uuid=${slug}`,
+          path: 'catalog',
           content: {
             component: 'series',
-            headline: `${seriesData.name} Series`,
+            headline: `${seriesData.name} Product Series`,
             name: seriesData.name,
             description: seriesData.description,
             photoUrl: undefined,
@@ -127,10 +128,10 @@ module.exports = class CategoryContent extends Content {
           name: productData.model,
           slug,
           tag_list: ['catalog', 'product', 'content'],
-          path: `catalog/products?uuid=${slug}`,
+          path: 'catalog',
           content: {
             component: 'product',
-            headline: productData.name,
+            headline: productData.model + '/' + productData.name,
             model: productData.model,
             name: productData.name,
             description: productData.description,

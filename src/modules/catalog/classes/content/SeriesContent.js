@@ -40,6 +40,7 @@ module.exports = class SeriesContent extends Content {
       await Promise.all(this.products.map(p => p.generate()))
       this.data.content.products = this.products.map(p => p.uuid)
       await super.generate()
+      await this.updatePath(`catalog?uuid=${this.uuid}`)
     } catch (error) {
       throw error
     }
@@ -54,10 +55,10 @@ module.exports = class SeriesContent extends Content {
           name: productData.model,
           slug,
           tag_list: ['catalog', 'product', 'content'],
-          path: `catalog/products?uuid=${slug}`,
+          path: 'catalog',
           content: {
             component: 'product',
-            headline: productData.name,
+            headline: productData.model + '/' + productData.name,
             model: productData.model,
             name: productData.name,
             description: productData.description,

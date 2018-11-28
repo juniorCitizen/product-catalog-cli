@@ -32,6 +32,7 @@ module.exports = class ProductContent extends Content {
         return {name: '', filename: asset.prettyUrl}
       })
       await super.generate()
+      await this.updatePath(`catalog/products?uuid=${this.uuid}`)
     } catch (error) {
       throw error
     }
