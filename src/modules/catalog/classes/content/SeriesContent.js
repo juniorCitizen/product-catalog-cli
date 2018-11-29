@@ -58,7 +58,7 @@ module.exports = class SeriesContent extends Content {
           path: 'catalog',
           content: {
             component: 'product',
-            headline: productData.model + '/' + productData.name,
+            headline: productData.model + ' / ' + productData.name,
             model: productData.model,
             name: productData.name,
             description: productData.description,

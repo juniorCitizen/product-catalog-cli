@@ -38,13 +38,13 @@ module.exports = class CategoryContent extends Content {
         this.data.content.photoUrl = this.asset.prettyUrl
       }
       this.categories = this.userData.categories
-        .filter(record => record.parentCategory === this.categoryData.name)
+        .filter(c => c.parentCategory === this.categoryData.name)
         .map(this.instantiateCategory())
       this.series = this.userData.series
-        .filter(record => record.parentCategory === this.categoryData.name)
+        .filter(s => s.parentCategory === this.categoryData.name)
         .map(this.instantiateSeries())
       this.products = this.userData.products
-        .filter(record => record.parentCategory === this.categoryData.name)
+        .filter(p => p.parentCategory === this.categoryData.name)
         .map(this.instantiateProduct())
       await Promise.all([
         ...this.categories.map(c => c.generate()),
@@ -73,7 +73,7 @@ module.exports = class CategoryContent extends Content {
           path: 'catalog',
           content: {
             component: 'category',
-            headline: `${categoryData.name} Product Category`,
+            headline: `${categoryData.name} Category`,
             name: categoryData.name,
             description: categoryData.description,
             photoUrl: undefined,
@@ -103,7 +103,7 @@ module.exports = class CategoryContent extends Content {
           path: 'catalog',
           content: {
             component: 'series',
-            headline: `${seriesData.name} Product Series`,
+            headline: `${seriesData.name} Series`,
             name: seriesData.name,
             description: seriesData.description,
             photoUrl: undefined,
@@ -131,7 +131,7 @@ module.exports = class CategoryContent extends Content {
           path: 'catalog',
           content: {
             component: 'product',
-            headline: productData.model + '/' + productData.name,
+            headline: productData.model + ' / ' + productData.name,
             model: productData.model,
             name: productData.name,
             description: productData.description,
